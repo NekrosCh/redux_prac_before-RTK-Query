@@ -1,0 +1,18 @@
+.heroes-enter {
+    opacity: 0;
+}
+
+.heroes-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.heroes-exit {
+    opacity: 1;
+}
+
+.heroes-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+
