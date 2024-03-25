@@ -2,8 +2,10 @@ import { useState } from "react";
 import {useHttp} from "../../hooks/http.hook"
 import { useSelector, useDispatch } from "react-redux";
 // import { heroesCreated } from "../../actions";
-import { heroesCreated } from "../heroesList/heroesSlice"
+import { heroesCreated } from "../heroesList/heroesSlice";
+import { selectAll } from "../heroesFilters/filtersSlice";
 import { v4 as uuidv4 } from 'uuid';
+import store from "../../store";
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -19,7 +21,7 @@ const HeroesAddForm = () => {
     const [heroesName, setHeroesName] = useState('');
     const [heroesDescr, setHeroesDescr] = useState('');
     const [heroesElem, setHeroesElem] = useState('');
-    const {filters} = useSelector(state => state.filters);
+    const filters = selectAll(store.getState());
     const {request} = useHttp();
     const dispatch = useDispatch();
 
@@ -50,7 +52,7 @@ const HeroesAddForm = () => {
             )
         })
     }
-    const elements = renderOptionsElem(filters);
+
     return (
         <form 
             onSubmit={onSubmitHeroes}
@@ -91,7 +93,7 @@ const HeroesAddForm = () => {
                     id="element" 
                     name="element">
                     <option >Я владею элементом...</option>
-                    {elements}
+                    {renderOptionsElem(filters)}
                 </select>
             </div>
 
